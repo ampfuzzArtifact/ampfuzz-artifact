@@ -37,7 +37,6 @@ Key technical details:
 ampfuzz-artifact/
 ├── config/                      
 │   ├── llm_settings.yaml       # Model parameters and API configuration
-│   ├── triggering_policy.yaml  # LLM call triggering conditions
 │   └── env_example.txt         # Environment setup template
 ├── prompts/                     
 │   ├── current/                # Exact prompts used in experiments
@@ -50,6 +49,7 @@ ampfuzz-artifact/
 └── scripts/                    
     ├── analyze_filter_stats.py  # LLM response quality analysis
     ├── analyze_variance.py      # Multi-run statistical analysis
+    ├── summarize_llm_usage.py   # Summarize llm usage analysis
     └── data_process/            # Experimental data processing
 ```
 
