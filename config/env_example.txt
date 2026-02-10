@@ -1,0 +1,9 @@
+# Environment configuration for AMPFuzz experiments
+# Copy to .env and configure
+
+DEEPSEEK_API_KEY=sk-your-api-key-here
+API_BASE_URL=https://api.deepseek.com/v1
+
+# Experiment settings
+EXPERIMENT_MODE=llm-full
+LOG_LEVEL=INFO

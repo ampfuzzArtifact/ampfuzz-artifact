@@ -1,0 +1,55 @@
+You are an expert in smart contract security testing.
+
+Please generate {num_cases} well-reasoned transaction test cases in JSON format based on the following smart contract ABI interface:
+
+### Contract ABI Interface:
+{interface}
+
+### Contract Address (DO NOT CHANGE):
+{contract}
+
+---
+
+Before generating test cases, perform the following steps:
+
+### Step 1: Analyze Function Semantics
+- Identify functions that may involve:
+  - Ether transfer (e.g., `call`, `transfer`, `send`)
+  - State changes (e.g., balance update, mapping writes)
+  - Reentrancy risk (e.g., external calls before internal updates)
+  - Access control logic
+
+### Step 2: Derive a Hypothesis
+- Based on function logic, propose a possible exploit path or interesting edge case.
+- Explain the intention behind the test (e.g., "try to reenter after withdraw").
+
+### Step 3: Generate Test Transactions
+- For each test case, generate:
+  - function name and arguments
+  - amount (in Wei)
+  - blocknumber and timestamp
+- You MUST return only the final JSON list under field `transactions`.
+
+---
+
+### Output Format (Strict JSON Only):
+
+{{
+    "transactions": [
+        {{
+            "arguments": ["transfer", "0x123...", 100],
+            "amount": 0,
+            "blocknumber": 1,
+            "timestamp": 1630000000
+        }}
+    ]
+}}
+
+Important:
+1. Do not return any explanation outside the JSON result.
+2. Do your reasoning before output, but return only the final JSON.
+3. Do NOT include contract or account fields (they are filled automatically).
+4. If no valid case can be generated, return `{{"transactions": []}}`.
+
+---
+Begin your reasoning and then return the final result.

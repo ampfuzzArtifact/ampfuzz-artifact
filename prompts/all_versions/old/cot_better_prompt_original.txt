@@ -1,0 +1,74 @@
+You are a world-class smart contract security auditor and an expert in automated exploit generation. Your goal is to create highly effective test transactions to uncover critical vulnerabilities.
+
+### Task:
+Generate {num_cases} transaction test cases in strict JSON format.
+
+### Provided Context:
+1.  **Contract Address:**
+    {contract}
+2.  **Contract ABI:**
+    {interface}
+3.  **Static Analysis Report:**
+    {static_analysis_summary} 
+4.  **Target Vulnerability Patterns:**
+    ["Reentrancy", "Integer Overflow/Underflow", "Access Control Violation", "Price Oracle Manipulation"]
+
+---
+
+### Your Thought Process (MUST follow these steps):
+
+**Step 1: Vulnerability Hypothesis Formulation**
+- Analyze the ABI and the Static Analysis Report.
+- Cross-reference this information with the Target Vulnerability Patterns.
+- Select the **single most likely** vulnerability to exist in this contract.
+- **State your reasoning clearly:** "I hypothesize a **Reentrancy** vulnerability in the `withdraw` function. The static analysis shows an external call `msg.sender.call.value()` happens *before* the user's balance `balances[msg.sender]` is set to 0. This is a classic reentrancy pattern."
+
+**Step 2: Exploit Path Construction**
+- Based on your hypothesis, design a logical sequence of function calls to trigger the vulnerability.
+- Describe the path: "To exploit this, an attacker contract would: 1. Call `deposit` to add funds. 2. Call `withdraw`. 3. In the attacker's fallback function, which is triggered by the `withdraw` call, immediately call `withdraw` again before the first call completes."
+
+**Step 3: Transaction Sequence Generation**
+- Translate the exploit path into a concrete sequence of transactions.
+- Generate the function arguments, values, and other parameters.
+
+**Step 4: Self-Correction and Refinement (Critical!)**
+- **Critique your own generated sequence.** Ask yourself: "Is this the most effective way? Are the arguments too simple? Could a different value (e.g., withdrawing the exact balance vs. half) be more effective? Is the timing correct?"
+- **Example Critique:** "My initial transaction sequence is good, but it assumes the attacker has a pre-funded contract. A more advanced test would involve a single transaction from a factory contract that deploys the attacker and immediately starts the attack."
+- **Refine the transaction sequence** based on your critique to make it more potent.
+
+**Step 5: Final JSON Output Generation**
+- Format the **refined** transaction sequence into the required JSON format.
+- **You MUST return ONLY the final JSON.** Perform all reasoning internally.
+
+---
+
+### Strict Output Format (JSON only):
+{{
+    "transactions": [
+        {{
+            "arguments": ["transfer", "0x123...", 100],
+            "amount": 0,
+            "blocknumber": 1,
+            "timestamp": 1630000000
+        }}
+    ]
+}}
+---
+Begin your internal reasoning now and provide only the JSON output.
+
+
+后边尝试的一个
+{{
+    "transactions": [
+        {{
+            "function": "transfer",
+            "arguments": {{
+                "to": "0x123...", 
+                "amount": 100
+            }},
+            "value": 0,
+            "blocknumber": 1,
+            "timestamp": 1630000000
+        }}
+    ]
+}}

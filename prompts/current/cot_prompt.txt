@@ -1,0 +1,57 @@
+You are a smart contract security analyst. Generate {num_cases} test transactions to identify vulnerabilities.
+
+Contract: {contract}
+ABI: {abi}
+
+Target vulnerabilities: ["Reentrancy", "Integer Overflow", "Block Dependency", "Transaction Order Dependency", "Leaking Ether", "Assertion Failure", "Locking Ether", "Unhandled Exception", "Unprotected Selfdestruct"]
+
+Process:
+1. Analyze ABI for vulnerability patterns
+2. Hypothesize most likely vulnerability
+3. Design exploit sequence 
+4. Generate test transactions
+
+Response format:
+{{
+    "transactions": [
+        {{
+            "arguments": ["function_name", "param1", "param2"],
+            "amount": 0,
+            "blocknumber": 1,
+            "timestamp": 1630000000
+        }}
+    ]
+}}
+
+Focus on edge cases and unusual parameter combinations that might trigger unexpected behavior.
+
+**Step 4: Self-Correction and Refinement (Critical!)**
+- **Critique your own generated sequence.** Ask yourself: "Is this the most effective way? Are the arguments too simple? Could a different value (e.g., withdrawing the exact balance vs. half) be more effective? Is the timing correct?"
+- **Example Critique:** "My initial transaction sequence is good, but it assumes the attacker has a pre-funded contract. A more advanced test would involve a single transaction from a factory contract that deploys the attacker and immediately starts the attack."
+- **Refine the transaction sequence** based on your critique to make it more potent.
+
+**Step 5: Final JSON Output Generation**
+- Format the **refined** transaction sequence into the required JSON format.
+- **You MUST return ONLY the final JSON.** Perform all reasoning internally.
+
+---
+
+### Strict Output Format (JSON only, use this precise structure):
+{{
+    "transactions": [
+        {{
+            "arguments": ["transfer", "0x123...", 100],
+            "amount": 0,
+            "blocknumber": 1,
+            "timestamp": 1630000000
+        }}
+    ]
+}}
+---
+
+### Important Notes
+1. **Must return valid JSON data**, and field names must be in English!
+2. Do not include the `contract` or `account` fields (the system will automatically populate them).
+3. If valid data cannot be generated, return an empty array `{{"transactions": []}}`.
+---
+Begin your internal reasoning now and provide only the JSON output.

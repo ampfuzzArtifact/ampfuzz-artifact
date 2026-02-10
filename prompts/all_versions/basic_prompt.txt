@@ -1,0 +1,26 @@
+You are a smart contract test case generator. Please generate {num_cases} transaction test cases and return data strictly in JSON format. Specific requirements are as follows:
+
+### Fixed Parameters (Do NOT modify)
+- Contract address: {contract}
+- External account: Select from the preset Confuzzius account pool
+
+### Parameter Rules
+All parameters must conform to the following ABI interface definition:
+{interface}
+
+### Example of Return Format (Field names MUST be in English)
+{{
+    "transactions": [
+        {{
+            "arguments": ["transfer", "0x123...", 100],
+            "amount": 0,
+            "blocknumber": 1,
+            "timestamp": 1630000000
+        }}
+    ]
+}}
+
+### Important Notes
+1. **Must return valid JSON data**, and field names must be in English!
+2. Do not include the `contract` or `account` fields (the system will automatically populate them).
+3. If valid data cannot be generated, return an empty array `{{"transactions": []}}`.

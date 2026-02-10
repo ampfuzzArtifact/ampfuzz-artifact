@@ -1,0 +1,29 @@
+# LLM Configuration for AMPFuzz Experiments
+# Settings used in our evaluation
+
+model_settings:
+  name: "deepseek-chat"
+  provider: "deepseek"
+  api_url: "https://api.deepseek.com/v1"
+  
+  # Temperature settings (critical for reproducibility)
+  temperature: 
+    init: 0.8       # Seed generation phase - higher for exploration
+    mutation: 0.5   # Mutation phase - lower for focused generation
+    
+  max_tokens: 2048
+  response_format: "json_object"  # Enforces structured output
+  
+  # Budget constraints (approximate costs with DeepSeek pricing)
+  max_tokens_per_contract: 50000  # ~$0.035 per contract
+  
+# Phase-specific configurations
+phases:
+  initial_generation:
+    prompt_file: "cot_prompt.txt"
+    cases_per_call: 5
+    
+  mutation_phase:
+    cases_per_call: 3
+    context_window: 1000  # tokens for execution context
+    trigger_rate: 0.3  # 30% of mutations
