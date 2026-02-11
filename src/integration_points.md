@@ -24,8 +24,7 @@ This document outlines where LLM calls are integrated into the ConFuzzius baseli
 ## Configuration Integration
 
 - Mode detection via `args.exp_mode` 
-- Settings loaded from `config/llm_settings.yaml`
-- Triggering rules from `config/triggering_policy.yaml`
+- Settings and triggering rules loaded from `config/llm_settings.yaml`
 - Prompts loaded from `prompts/current/`
 
 ## Performance Notes

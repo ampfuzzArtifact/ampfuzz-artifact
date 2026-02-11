@@ -1,6 +1,6 @@
 # AMPFuzz: LLM-Enhanced Smart Contract Fuzzing
 
-This repository contains implementation artifacts for our LLM-enhanced smart contract fuzzing approach. Following reviewer feedback on reproducibility, we provide the exact prompts, model configurations, and triggering policies used in our experiments.
+This repository contains implementation artifacts for our AmpFuzz LLM-enhanced smart contract fuzzing approach, including prompts, model configurations used in our experiments and core logic.
 
 ## Reproducibility Artifacts
 
@@ -9,14 +9,10 @@ This repository contains implementation artifacts for our LLM-enhanced smart con
 - `basic_prompt.txt` - Simplified prompt for fallback cases
 
 **Model Configuration** (`config/llm_settings.yaml`):
-- DeepSeek-chat API settings
-- Temperature parameters: 0.8 (exploration), 0.5 (focused mutation)  
+- DeepSeek-chat API settings  
+- Temperature parameters: 0.8 (exploration), 0.5 (focused mutation)
 - Token limits and budget constraints
-
-**LLM Triggering Policy** (`config/triggering_policy.yaml`):
-- Initial generation: Always (5 test cases per new contract)
-- Mutation enhancement: 30% probability during evolution
-- Context-aware triggers: new coverage, bug detection, fitness improvement
+- LLM triggering policy: Initial generation (5 test cases per contract), 30% mutation enhancement probability
 
 ## Implementation Overview
 
