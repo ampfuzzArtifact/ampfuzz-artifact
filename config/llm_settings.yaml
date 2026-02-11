@@ -14,8 +14,8 @@ model_settings:
   max_tokens: 2048
   response_format: "json_object"  # Enforces structured output
   
-  # Budget constraints (approximate costs with DeepSeek pricing)
-  max_tokens_per_contract: 50000  # ~$0.035 per contract
+  # Budget constraints
+  max_tokens_per_contract: 50000  # Token limit per contract
   
 # Phase-specific configurations
 phases:

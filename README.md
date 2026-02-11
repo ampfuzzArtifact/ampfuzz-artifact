@@ -23,7 +23,7 @@ Our approach integrates LLM guidance into the ConFuzzius baseline fuzzer at two 
 
 Key technical details:
 - Uses different temperature settings for exploration vs exploitation
-- Implements comprehensive filtering (98.7% success rate)
+- Implements comprehensive filtering and response validation
 - Context capture from successful execution traces
 - Budget-controlled API usage (~$0.035 per contract)
 
@@ -59,11 +59,11 @@ ampfuzz-artifact/
 **Triggering Logic:**
 - Mode detection: Check `args.exp_mode` for 'llm' variants
 - Context capture: Successful cases stored in `llm_amplifier_context`
-- Probability-based: 30% of mutations use LLM guidance
+- Probability-based LLM guidance integration
 
 **Quality Control:**
 - JSON validation and ABI compatibility checking
 - Type sanitization for argument conversion
-- Success rate: 98.7% of LLM responses pass filters
+- Comprehensive response quality validation
 
 This artifact provides the technical specifications needed for independent validation while preserving the core implementation approach described in our paper.
